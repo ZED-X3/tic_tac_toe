@@ -18,4 +18,4 @@ class Player:
             print(f'please choose the right sign.')
             self.enter_sign()
 
-        return f"{self.player_name}'s chosen sign is: {self.sign}"
+        return self.sign

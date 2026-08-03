@@ -13,9 +13,19 @@ class Board:
             row = ' | '.join(row)
             rows.append(row)
 
-        changed_rows = "\n----------\n".join(rows)
+        display_board = "\n----------\n".join(rows)
 
-        return changed_rows
+        return display_board
     
     def reset_board(self):
+        for row in range(3):
+            for column in range(3):
+                self.board[row][column] = " "
+
         return self.board
+
+    def get_cell(self, row, column):
+        return self.board[row][column]
+
+    def place_sign(self, row, column, sign):
+        self.board[row][column] = sign
