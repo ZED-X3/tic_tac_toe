@@ -41,33 +41,55 @@ class Game:
 
     def winning_status(self):
 
-        board = self.board.get_cell()
+        board = self.board.get_board()
 
         main_diag = [board[i][i] for i in range(3)]
         if all(win == self.player1.sign for win in main_diag):
-            print(f'{self.player1} won.')
+            return(f'{self.player1.player_name} won.')
 
-        elif all(win == self.player2.sign for win in main_diag):
-            print(f'{self.player2} won.')
+        elif all(win == self.player2.player_name.sign for win in main_diag):
+            return(f'{self.player2.player_name} won.')
 
         sub_diag = [board[i][3 - i - 1] for i in range(3)]
-        if all(win == self.player1.sign for win in sub_diag):
-            print(f'{self.player1} won.')
+        if all(win == self.player1.player_name.sign for win in sub_diag):
+            return(f'{self.player1.player_name} won.')
 
-        elif all(win == self.player2.sign for win in sub_diag):
-            print(f'{self.player2} won.')
+        elif all(win == self.player2.player_name.sign for win in sub_diag):
+            return(f'{self.player2.player_name} won.')
 
         for n in range(0,3):
             columns = [board[i][n] for i in range(3)]
-            if all(win == self.player1.sign for win in columns):
-                print(f'{self.player1} won.')
+            if all(win == self.player1.player_name.sign for win in columns):
+                return(f'{self.player1.player_name} won.')
 
-            elif all(win == self.player2.sign for win in columns):
-                print(f'{self.player2} won.')
+            elif all(win == self.player2.player_name.sign for win in columns):
+                return(f'{self.player2.player_name} won.')
 
             rows = [board[n][i] for i in range(3)]
-            if all(win == self.player1.sign for win in rows):
-                print(f'{self.player1} won.')
+            if all(win == self.player1.player_name.sign for win in rows):
+                return(f'{self.player1.player_name} won.')
             
-            elif all(win == self.player2.sign for win in rows):
-                print(f'{self.player2} won.')
+            elif all(win == self.player2.player_name.sign for win in rows):
+                return(f'{self.player2.player_name} won.')
+
+        return False
+
+    def run_game(self):
+        self.start_game()
+
+        if not self.winning_status():
+            self.player_move()
+        else:
+            self.board.reset_board()
+
+    def game_flag(self):
+        self.flag = input('do you want to play?:' )
+        return self.flag
+
+    def new_game(self):
+        self.game_flag()
+        while self.flag == 'y':
+            self.run_game()
+            self.game_flag()
+        else:
+            return f'the game has ended.'
