@@ -22,8 +22,7 @@ class Board:
             for column in range(3):
                 self.board[row][column] = " "
 
-    # def get_cell(self, row, column):
-    #     return self.board[row][column]
+        return self.board
 
     def place_sign(self, row, column, sign):
         if self.is_empty(row, column):

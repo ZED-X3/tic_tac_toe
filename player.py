@@ -1,21 +1,37 @@
 class Player:
-    def __init__(self, player_name):
-        self.player_name = player_name
+    def __init__(self):
+        self.player_name = None
         self.sign = None
 
-    def enter_sign(self):
-        self.sign = input('choose from the signs:')
-        return self.sign
+    def enter_name(self, message):
+        while True:
+            try:
+                self.player_name = input(message)
 
-    def choose_sign(self):
-        valid_signs = "  ".join(['✅', '❎', '⭕', '❌'])
+                if not self.player_name.strip():
+                    raise ValueError
 
-        print(valid_signs)
-        self.enter_sign()
+                return self.player_name
 
-        while self.sign not in valid_signs:
+            except ValueError:
+                print('name can not be empty!')
 
-            print(f'please choose the right sign.')
-            self.enter_sign()
+    def enter_sign(self, message):
 
-        return self.sign
+        while True:
+            try:
+                valid_signs = ['✅', '❎', '⭕', '❌']
+                print(f"choose: {'  '.join(valid_signs)}")
+
+                self.sign = input(message)
+
+                if self.sign not in valid_signs:
+                    raise ValueError
+
+                return self.sign
+
+            except ValueError:
+                print('the sign must be among the vaild ones!')
+
+    def __str__(self):
+        return self.player_name
